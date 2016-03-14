@@ -5,7 +5,8 @@ exports.up = function(knex, Promise) {
     table.integer('student_id').references('users', 'id');
     table.integer('curriculum_id').references('curricula', 'id');
     table.date('feedback_dt');
-  })
+    table.integer('rating');
+  });
   
 };
 
