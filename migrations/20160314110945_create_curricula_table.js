@@ -4,13 +4,13 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('type_id').references('types', 'id');
     table.integer('topic_id').references('topics', 'id');
-    table.integer('instructor_id').references('instructors', 'id');;
+    table.integer('instructor_id').references('instructors', 'id');
     table.string('title');
     table.string('link');
-    table.date('assignment_dt');
-    table.date('feedback_dt');
-    table.date('dt_created');
-    table.date('dt_modified'); 
+    table.date('assignmentDt');
+    table.date('feedbackDt');
+    table.date('dtCreated');
+    table.date('dtModified'); 
   });
   
 };
