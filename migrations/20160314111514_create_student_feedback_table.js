@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('student_id').references('users', 'id');
     table.integer('curriculum_id').references('curricula', 'id');
-    table.date('feedback_dt');
+    table.date('feedbackDt');
     table.integer('rating');
   });
   
