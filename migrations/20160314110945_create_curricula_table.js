@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
     table.date('feedback_dt');
     table.date('dt_created');
     table.date('dt_modified'); 
-  })
+  });
   
 };
 
