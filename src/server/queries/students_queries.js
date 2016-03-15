@@ -16,9 +16,14 @@ module.exports = {
   
     allAssessmentsForOneStudent : function(id) {
       
-        return knex('student_feedback')
-        .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
-        .where('student_feedback.student_id', id); 
+       var studentRatings = knex('student_feedback')
+       .where('student_feedback.student_id', id).as('rating'); 
+
+        return knex('curricula')
+        .leftJoin(studentRatings, 'curricula.id', 'rating.curriculum_id')
+        .innerJoin('types', 'types.id', 'curricula.type_id')
+        .orderBy('curricula.assignmentDt', 'desc');
+        
     },
     
     allUnratedForOneStudent : function(id) {
