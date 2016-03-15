@@ -33,7 +33,7 @@ module.exports = {
         
     },
     
-    avgAssessesments : function() {
+    avgAssessments : function() {
         
       return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
       .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')

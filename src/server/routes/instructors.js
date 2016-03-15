@@ -4,7 +4,7 @@ var queries = require('../queries/instructor_queries');
 
 router.get('/', function(req, res, next) {
     
-    queries.avgAssessesments()
+    queries.avgAssessments()
     
     .then( function (result) { 
         res.render('instructors', { title: 'Instructors',
