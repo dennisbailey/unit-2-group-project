@@ -14,6 +14,17 @@ router.get('/', function(req, res, next) {
   });
 
 
+// Registration
+router.get('/registration', function(req, res, next) {
+  
+    res.render('registration', 
+        { title: 'register'}
+    );
+    
+});
+
+
+
 // Login
 router.get('/login', function(req, res, next) {
   
