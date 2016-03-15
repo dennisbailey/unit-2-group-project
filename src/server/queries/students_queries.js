@@ -35,6 +35,33 @@ module.exports = {
         
     },
 
+
+    allAssessmentsByTypeForOneStudent : function(id) {
+      
+       var studentRatings = knex('student_feedback')
+       .where('student_feedback.student_id', id).as('rating'); 
+
+        return knex('curricula')
+        .leftJoin(studentRatings, 'curricula.id', 'rating.curriculum_id')
+        .innerJoin('types', 'types.id', 'curricula.type_id')
+        .where('types.id', id)
+        .orderBy('curricula.assignmentDt', 'desc');
+        
+    },
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
     allTypeAssessments : function(id) {
       
         return knex('users')

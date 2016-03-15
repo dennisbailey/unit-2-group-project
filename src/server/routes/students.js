@@ -33,17 +33,20 @@ router.get('/all', function(req, res, next){
   
 });
 
-// router.get('/:id', function(req, res, next){
 
-//     queries.allTypeAssessments(req.params.id)
+
+
+router.get('/:id', function(req, res, next){
+
+    queries.allAssessmentsByTypeForOneStudent(req.params.id)
     
-//     .then( function (result) { 
-//         res.render('instructors-type', { title: 'Instructors',
-//                                     data: result });
-//     })
+    .then( function (result) { 
+        res.render('students-type', { title: 'students',
+                                    data: result });
+    })
     
-//     .catch( function ( error ) { return error; });
+    .catch( function ( error ) { return error; });
   
-// });
+});
 
 module.exports = router;
