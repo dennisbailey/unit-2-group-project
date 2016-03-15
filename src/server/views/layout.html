@@ -8,27 +8,46 @@
   </head>
   <body>
     <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-     
-      <a class="navbar-brand" href="/">Feedback Tracker</a>
-    </div>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Feedback Tracker</a>
+        </div>
+    
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/students">Students</a></li>
+          <li><a href="/instructors" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Instructors<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="/instructors/all">All</a></li>
+              
+              <li class="divider"></li>
+              
+              <li><a href="/instructors/1">Exercises</a></li>
+              <li><a href="/instructors/2">Homework</a></li>
+              <li><a href="/instructors/3">Lectures</a></li>
+              
+              <li class="divider"></li>
+              
+              <li><a href="/instructors/4">Projects</a></li>
+              <li><a href="/instructors/5">Stretch Goals</a></li>
+              <li><a href="/instructors/6">Warmups</a></li>
+              
+              <li class="divider"></li>
+              
+              <li><a href="/instructors/admin">Admin</a></li>
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="/students">Students</a></li>
-        <li><a href="/instructors">Instructors</a></li>
-     </ul>
-     <ul class="nav navbar-nav navbar-right">
-        <li><a href="/login">Login</a></li>
-        <li><a href="/regisration">Registration</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-
+            </ul>
+          </li> <!-- End of instructors dopdown -->
+        </ul> <!-- End of navbar-nav -->
+        
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/login">Login</a></li>
+          <li><a href="/regisration">Register</a></li>
+        </ul> <!-- End of navbar-right -->
+      
+      </div><!-- End of Container Fluid -->
+    
+    </nav> <!-- End of Navbar -->
 
 
     {% block content %}
