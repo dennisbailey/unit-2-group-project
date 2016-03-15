@@ -5,7 +5,7 @@ var index_queries = require('../queries/index_queries');
 
 router.get('/', function(req, res, next) {
     
-    res.render('index', { title: 'Instructors' });
+    res.render('instructors', { title: 'Instructors' });
 
 
   
