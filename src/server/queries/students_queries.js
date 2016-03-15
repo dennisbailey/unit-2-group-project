@@ -28,10 +28,21 @@ module.exports = {
     
     allUnratedForOneStudent : function(id) {
       
-        return knex('student_feedback')
-        .rightJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
-        .innerJoin('types', 'types.id', 'curricula.type_id')
-        .whereNot('student_feedback.student_id', id);
+      //fined what the student has rated
+      var feedbackPresent = knex('student_feedback')
+                            .select('curriculum_id')
+                            .where('student_id', id)
+                            .as('feedbackPresent');
+      
+      //fined what the students needs to rated
+      var feedbackNeeded =  knex('curricula')
+                            .leftJoin(feedbackPresent, 'curricula.id', 'feedbackPresent.curriculum_id')
+                            .whereNull('feedbackPresent.curriculum_id')
+                            .as('feedbackNeeded');
+      
+      //add the type description
+        return knex(feedbackNeeded)
+        .innerJoin('types', 'types.id', 'feedbackNeeded.type_id');
         
     },
 

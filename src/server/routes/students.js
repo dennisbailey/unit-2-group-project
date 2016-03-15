@@ -17,7 +17,7 @@ function userName(user){
 
 
 router.get('/', function(req, res, next) {
-   queries.allUnratedForOneStudent(1)
+   queries.allUnratedForOneStudent(req.user.id)
     .then(function(result){
       console.log(result);
         res.render('students', { title: 'students', data: result, name: userName(req.user)});
@@ -33,8 +33,26 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/all', function(req, res, next){
+    console.log(req.user.id);
+    queries.allAssessmentsForOneStudent(req.user.id)
     
-    queries.allAssessmentsForOneStudent(2)
+    .then( function (result) { 
+        res.render('studentsAll', { title: 'Students',
+                                    data: result , name: userName(req.user)});
+    })
+    
+    .catch( function ( error )
+     {console.log(error); 
+      return error; });
+  
+});
+
+
+
+
+router.post('/all', function(req, res, next){
+    
+    queries.allAssessmentsForOneStudent(req.user.id)
     
     .then( function (result) { 
         res.render('studentsAll', { title: 'Students',
