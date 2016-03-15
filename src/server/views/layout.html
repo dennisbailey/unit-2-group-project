@@ -60,8 +60,13 @@
         </ul> <!-- End of navbar-nav -->
         
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/login">Login</a></li>
-          <li><a href="/regisration">Register</a></li>
+        {% if status===0  %}
+           <li><a href="/login">Login</a></li>
+           <li><a href="/regisration">Register</a></li>
+        {% else %}
+           <li><a href="/logout">Logout</a></li>
+         {% endif %} 
+         
         </ul> <!-- End of navbar-right -->
       
       </div><!-- End of Container Fluid -->

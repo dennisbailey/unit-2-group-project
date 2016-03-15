@@ -6,6 +6,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var swig = require('swig');
+var cookieSession = require('cookie-session');
+var passport = require('./lib/auth.js');
+var helpers = require('./lib/helpers.js');
 
 
 // *** routes *** //
@@ -32,6 +35,12 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(cookieSession({
+  name: 'local',
+  keys: ['aaa', 'sss']
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, '../client')));
 
 
