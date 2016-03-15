@@ -6,10 +6,25 @@ var helpers = require('../lib/helpers');
 
 
 
+
+
+
+//helper function section 
+function userName(user){
+  var name = '';
+  if(user){
+    name = user.first;
+  }
+  return name;
+}
+
+
+
+
 router.get('/', function(req, res, next) {
   index_queries.allAssignments()
   .then(function(result){
-    res.render('index', { title: 'Home', status: req.session.length, data: result });
+    res.render('index', { title: 'Home', status: req.session.length, data: result, name: userName(req.user)});
   });
 
 
