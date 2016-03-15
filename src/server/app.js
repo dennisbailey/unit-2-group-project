@@ -10,7 +10,8 @@ var swig = require('swig');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
-var instructors = require('./routes/instructors.js')
+var instructors = require('./routes/instructors.js');
+var students = require('./routes/students.js');
 
 // *** express instance *** //
 var app = express();
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use('/', routes);
 // app.use('/students', students );
 app.use('/instructors', instructors);
+app.use('/students', students);
 
 
 // catch 404 and forward to error handler

@@ -6,9 +6,12 @@ var index_queries = require('../queries/index_queries');
 router.get('/', function(req, res, next) {
   index_queries.allAssignments()
   .then(function(result){
-    console.log(result[3]);
+    console.log(result);
     res.render('index', { title: 'Home', data: result });
   });
+
+
+
 
   
 });
