@@ -22,7 +22,7 @@
     <tr>
       <td>{{ loop.index }}</td>
       <td><a href="{{ row.link }}" alt="{{ row.title }}">{{ row.title }}</a></td>
-      <td>{{ row.type }}</td>
+      <td><a href="/students/{{ row.type_id }}">{{ row.type }}</a></td>
 
      {% if row.rating > 0 %}
 
