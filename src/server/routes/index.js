@@ -9,13 +9,14 @@ var helpers = require('../lib/helpers');
 router.get('/', function(req, res, next) {
   index_queries.allAssignments()
   .then(function(result){
-    console.log(result);
     res.render('index', { title: 'Home', status: req.session.length, data: result });
   });
 
 
 // Registration
 router.get('/registration', function(req, res, next) {
+
+
   
     res.render('registration', 
         { title: 'register'}
@@ -23,6 +24,31 @@ router.get('/registration', function(req, res, next) {
     
 });
 
+router.post('/registration', function(req, res, next) {
+  var newUser = req.body;
+  var hash = helpers.hashing(newUser.password);
+
+  newUser.password = hash;
+  
+  index_queries.checkIfUserExists(newUser.email)
+  
+  .then(function(data) {
+    if(data.length) {
+      
+      res.render('registration', {
+        message: 'This email already exists'
+      });
+    
+    } else {
+      
+      index_queries.addNewUser(newUser)
+      
+      .then(function() {
+        res.redirect('/');
+      });
+    }
+  });
+});
 
 
 // Login
