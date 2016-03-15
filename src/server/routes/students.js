@@ -3,9 +3,19 @@ var router = express.Router();
 var queries = require('../queries/students_queries');
 
 router.get('/', function(req, res, next) {
-        res.render('students', { title: 'students' });
+   queries.allUnratedForOneStudent(1)
+    .then(function(result){
+      console.log(result);
+        res.render('students', { title: 'students', data: result});
+      })
+    
+    .catch(function(error){
+      return error;
+    });
 
 });
+
+
 
 
 // router.get('/all', function(req, res, next){
