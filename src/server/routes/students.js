@@ -33,6 +33,42 @@ router.get('/', function(req, res, next) {
 
 
 router.get('/all', function(req, res, next){
+    
+    queries.allAssessmentsForOneStudent(req.user.id)
+    
+    .then( function (result) { 
+      console.log(result);
+        res.render('studentsAll', { title: 'Students',
+                                    data: result , name: userName(req.user)});
+    })
+    
+    .catch( function ( error ){
+     
+      return error; });
+  
+});
+
+
+
+
+router.post('/all', function(req, res, next){
+    
+    queries.allAssessmentsForOneStudent(req.user.id)
+    
+    .then( function (result) { 
+
+        res.render('studentsAll', { title: 'Students',
+                                    data: result , name: userName(req.user)});
+    })
+    
+    .catch( function ( error )
+     {console.log(error); 
+      return error; });
+  
+});
+
+
+router.get('/all/:id', function(req, res, next){
     console.log(req.user.id);
     queries.allAssessmentsForOneStudent(req.user.id)
     
@@ -50,25 +86,7 @@ router.get('/all', function(req, res, next){
 
 
 
-router.post('/all', function(req, res, next){
-    
-    queries.allAssessmentsForOneStudent(req.user.id)
-    
-    .then( function (result) { 
-        res.render('studentsAll', { title: 'Students',
-                                    data: result , name: userName(req.user)});
-    })
-    
-    .catch( function ( error )
-     {console.log(error); 
-      return error; });
-  
-});
-
-
-
-
-router.get('/:id', function(req, res, next){
+router.get('/:typeid', function(req, res, next){
 
     queries.allAssessmentsByTypeForOneStudent(req.params.id)
     

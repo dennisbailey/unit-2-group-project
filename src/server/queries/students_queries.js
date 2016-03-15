@@ -20,6 +20,7 @@ module.exports = {
        .where('student_feedback.student_id', id).as('rating'); 
 
         return knex('curricula')
+        .select('curricula.id', 'curricula.type_id', 'curricula.assignmentDt', 'curricula.title', 'rating.rating', 'types.type' )
         .leftJoin(studentRatings, 'curricula.id', 'rating.curriculum_id')
         .innerJoin('types', 'types.id', 'curricula.type_id')
         .orderBy('curricula.assignmentDt', 'desc');
