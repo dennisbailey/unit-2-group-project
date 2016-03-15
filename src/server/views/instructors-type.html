@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+ 
+    <div class="row">
+    	<div class="col-md-4">
+      	
+    	</div>
+    </div>
+ 
+    <table class="table table-striped table-hover ">
+      
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Student</th>
+          <th>Rating</th>
+          <th>Title</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+       {% for obj in data %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>{{ obj.first}} {{ obj.last }}</td>
+          <td>{{ obj.rating }}</td>
+          <td><a href="{{ obj.link }}" alt="{{ obj.title }}">{{ obj.title }}</a></td>
+          <td>{{ obj.assignmentDt|date('Y-m-d') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    
+    </table> 
+
+  </div>
+
+{% endblock %}
