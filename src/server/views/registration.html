@@ -9,11 +9,16 @@
     
     {% if message %}
     <br>
-    <div class="row">
-      <div class="well">
+    <div class="alert alert-dismissible alert-warning">
+      <button type="button" class="close" data-dismiss="alert"></button>
+      <h4>Warning!</h4>
+      <p>{{ message }}</p>
+    </div>
+    <!-- <div class="row">
+      <div class="well alert alert-dismissible alert-warning">
         <h4 class="center">{{ message }}</h4>
       </div>
-    </div>
+    </div> -->
     {% endif %}
     
     <div class="row">

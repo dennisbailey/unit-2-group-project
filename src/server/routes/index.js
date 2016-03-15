@@ -87,7 +87,7 @@ router.post('/login', function(req, res, next) {
             res.render('login', 
               {
                 title: 'Unknown Login', 
-                error: 'This email and password combinaton is unknown to us.'
+                message: 'This email and password combinaton is unknown to us.'
               }
             );
 
