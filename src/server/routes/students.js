@@ -2,11 +2,25 @@ var express = require('express');
 var router = express.Router();
 var queries = require('../queries/students_queries');
 
+
+
+//helper function section 
+function userName(user){
+  var name = '';
+  if(user){
+    name = user.first;
+  }
+  return name;
+}
+
+
+
+
 router.get('/', function(req, res, next) {
    queries.allUnratedForOneStudent(1)
     .then(function(result){
       console.log(result);
-        res.render('students', { title: 'students', data: result});
+        res.render('students', { title: 'students', data: result, name: userName(req.user)});
       })
     
     .catch(function(error){
@@ -24,7 +38,7 @@ router.get('/all', function(req, res, next){
     
     .then( function (result) { 
         res.render('studentsAll', { title: 'Students',
-                                    data: result });
+                                    data: result , name: userName(req.user)});
     })
     
     .catch( function ( error )
@@ -42,7 +56,7 @@ router.get('/:id', function(req, res, next){
     
     .then( function (result) { 
         res.render('students-type', { title: 'students',
-                                    data: result });
+                                    data: result, name: userName(req.user) });
     })
     
     .catch( function ( error ) { return error; });
