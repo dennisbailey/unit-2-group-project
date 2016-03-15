@@ -6,45 +6,33 @@
 {% block content %}
 
   <div class="container">
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="/students/addrating">
   <fieldset>
-    <legend>Student name</legend>
-    <div class="form-group">
-      <label for="input" class="col-lg-2 control-label">Title</label>
-      <!-- <select class="form-control" id="select">
-          <option>Title1</option>
-          <option>Title2</option>
-          <option>Title3</option>
-          <option>Title4</option>
-          <option>Title5</option>
-        </select> -->
-      <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputTitle" placeholder="Title">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="textArea" class="col-lg-2 control-label">Feedback</label>
-      <div class="col-lg-10">
-        <textarea class="form-control" rows="3" id="textArea" placeholder="add some feedback"></textarea>
-      </div>
-    </div>
+  {% for row in data %}
+    <legend>{{ row.type }} | {{ row.title }}</legend>
+
+
+    
     <div class="form-group">
       <label for="select" class="col-lg-2 control-label">Rating</label>
       <div class="col-lg-10">
         <select class="form-control" id="select">
-          <option>1-I didn't do it</option>
-          <option>2-It was really hard</option>
-          <option>3-I tried, but I didn't finish</option>
-          <option>4-I finished</option>
-          <option>5-It was very easy</option>
+          <option></option>
+          <option value='{{ row.curriculum_id}}-1' >1-I didn't do it</option>
+          <option value='{{ row.curriculum_id}}-2'>2-It was really hard</option>
+          <option value='{{ row.curriculum_id}}-3'>3-I tried, but I didn't finish</option>
+          <option value='{{ row.curriculum_id}}-4'>4-I finished</option>
+          <option value='{{ row.curriculum_id}}-5'>5-It was very easy</option>
         </select>
         <br>
       </div>
     </div>
+    {% endfor %}
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
-        <button type="reset" class="btn btn-default">Cancel</button>
+        
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="reset" class="btn btn-default">Cancel</button>
       </div>
     </div>
   </fieldset>
@@ -52,3 +40,4 @@
   </div>
 
 {% endblock %}
+
