@@ -10,7 +10,7 @@ var swig = require('swig');
 
 // *** routes *** //
 var routes = require('./routes/index.js');
-
+var instructors = require('./routes/instructors.js')
 
 // *** express instance *** //
 var app = express();
