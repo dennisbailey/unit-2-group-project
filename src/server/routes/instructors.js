@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
                                     data: result });
     })
     
-    .catch( function ( error ) { return error; })
+    .catch( function ( error ) { return error; });
   
 });
 
@@ -25,7 +25,7 @@ router.get('/all', function(req, res, next){
                                     data: result });
     })
     
-    .catch( function ( error ) { return error; })
+    .catch( function ( error ) { return error; });
   
 });
 
@@ -38,7 +38,7 @@ router.get('/:id', function(req, res, next){
                                     data: result });
     })
     
-    .catch( function ( error ) { return error; })
+    .catch( function ( error ) { return error; });
   
 });
 
