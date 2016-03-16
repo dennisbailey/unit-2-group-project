@@ -24,10 +24,7 @@ router.get('/', function(req, res, next) {
     
     return Promise.all(promises)
     
-//     queries.avgAssessments()
-    
     .then( function (result) {
-      console.log(result);
         res.render('instructors', { title: 'Instructors',
                                     data: result[0],
                                     students: result[1], 
@@ -35,7 +32,7 @@ router.get('/', function(req, res, next) {
         );
     })
     
-    .catch( function ( error ) { console.log(error);return error; });
+    .catch( function ( error ) { return error; });
   
 });
 
@@ -46,7 +43,8 @@ router.get('/all', function(req, res, next){
     
     .then( function (result) {
         res.render('instructors-all', { title: 'Instructors',
-                                    data: result , name: userName(req.user) });
+                                        data: result, 
+                                        name: userName(req.user) });
     })
     
     .catch( function ( error ) { return error; });
@@ -58,27 +56,47 @@ router.get('/:type', function(req, res, next){
     queries.avgTypeAssessments(req.params.type)
     
     .then( function (result) { 
-      console.log(result);
         res.render('instructors-type', { title: 'Instructors',
-                                    data: result, name: userName(req.user) });
+                                         data: result, 
+                                         name: userName(req.user) });
     })
     
-    .catch( function ( error ) { console.log(error);return error; });
+    .catch( function ( error ) { return error; });
   
 });
 
+router.get('/student/:id', function(req, res, next){
+    
+    var promises = [];
+    
+    promises.push(queries.avgAssessmentsForOneStudent(req.params.id));
+    
+    promises.push(queries.oneStudent(req.params.id));
+    
+    return Promise.all(promises)
+    
+    .then( function (result) {
+        res.render('instructors-student', { title: 'Instructors',
+                                             summary: result[0],
+                                             data: result[1], 
+                                             name: userName(req.user) });
+    })
+    
+    .catch( function ( error ) { return error; });
+  
+});
 
 router.get('/:type/:id', function(req, res, next){
-    console.log(req.params.type);
+  
     queries.allTypeAssessments(req.params.type, req.params.id)
     
     .then( function (result) { 
-      console.log(result);
         res.render('instructors-type-all', { title: 'Instructors',
-                                    data: result, name: userName(req.user) });
+                                             data: result, 
+                                             name: userName(req.user) });
     })
     
-    .catch( function ( error ) { console.log(error);return error; });
+    .catch( function ( error ) { return error; });
   
 });
 
