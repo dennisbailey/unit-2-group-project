@@ -110,7 +110,7 @@ router.get('/all/:id', function(req, res, next){
 
 router.get('/:typeid', function(req, res, next){
 
-    queries.allAssessmentsByTypeForOneStudent(req.params.id)
+    queries.allAssessmentsByTypeForOneStudent(req.params.typeid)
     
     .then( function (result) { 
         res.render('students-type', { title: 'students',
