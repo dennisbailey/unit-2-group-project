@@ -27,6 +27,8 @@
  
   </div>
   
+  <hr>
+  
   <div class="row">
     <h2>Students</h2>
     <table class="table table-striped table-hover ">
@@ -44,7 +46,7 @@
        {% for student in students %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td>{{ student.first }}</td>
+          <td><a href="/instructors/student/{{ student.id }}">{{ student.first }}</a></td>
           <td>{{ student.last }}</td>
           <td>{{ Math.round(student.avg * 10)/10 }}</td>
         </tr>
