@@ -16,3 +16,19 @@ body {
   font-size: 16px;
   color: black;
 }
+
+.glyphicon{
+  font-size: 2em;
+}
+
+.glyphicon.red{
+  color: red;
+}
+
+.glyphicon.orange{
+  color: orange;
+}
+
+.glyphicon.green{
+  color: green;
+}
