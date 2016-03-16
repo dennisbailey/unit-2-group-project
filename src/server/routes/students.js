@@ -13,13 +13,34 @@ function userName(user){
   return name;
 }
 
+function createInsert(object){
 
+   var body = object;
+   var insert =[];
+   var keys = Object.keys(body);
+   var today = new Date().toJSON().slice(0,10);
+   
+   for(i=0; i < keys.length; i++){
+      if(body[keys[i]] !== ''){
+        var object= {};
+        object.student_id = req.user.id;
+        object.curriculum_id = keys[i];
+        object.rating = body[keys[i]];
+        object.feedbackDt =  today;
+
+        insert.push(object);
+      }
+     }
+   return insert;
+ 
+ }
 
 
 router.get('/', function(req, res, next) {
+
    queries.allUnratedForOneStudent(req.user.id)
     .then(function(result){
-      console.log(result);
+      console.log(result)
         res.render('students', { title: 'students', data: result, name: userName(req.user)});
       })
     
@@ -37,7 +58,7 @@ router.get('/all', function(req, res, next){
     queries.allAssessmentsForOneStudent(req.user.id)
     
     .then( function (result) { 
-      console.log(result);
+     
         res.render('studentsAll', { title: 'Students',
                                     data: result , name: userName(req.user)});
     })
@@ -51,25 +72,26 @@ router.get('/all', function(req, res, next){
 
 
 
-router.post('/all', function(req, res, next){
-    
-    queries.allAssessmentsForOneStudent(req.user.id)
-    
-    .then( function (result) { 
+router.post('/addrating', function(req, res, next){
+       
+   var ratedRatings = req.body;
+   var insertbody = createInsert(ratedRatings);
 
-        res.render('studentsAll', { title: 'Students',
-                                    data: result , name: userName(req.user)});
+   queries.insertFeedback(insertbody)
+
+   .then( function (result) { 
+        res.redirect('/students');
     })
     
     .catch( function ( error )
-     {console.log(error); 
+     {
       return error; });
-  
+
 });
 
 
 router.get('/all/:id', function(req, res, next){
-    console.log(req.user.id);
+    
     queries.allAssessmentsForOneStudent(req.user.id)
     
     .then( function (result) { 
