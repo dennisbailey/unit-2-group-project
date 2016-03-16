@@ -18,10 +18,9 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Student</th>
-          <th>Rating</th>
           <th>Title</th>
           <th>Date</th>
+          <th>Average</th>
         </tr>
       </thead>
       
@@ -29,10 +28,9 @@
        {% for obj in data %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td>{{ obj.first}} {{ obj.last }}</td>
-          <td>{{ obj.rating }}</td>
-          <td><a href="{{ obj.link }}" alt="{{ obj.title }}">{{ obj.title }}</a></td>
+          <td><a href="instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ obj.title }}</a></td>
           <td>{{ obj.assignmentDt|date('Y-m-d') }}</td>
+          <td><a href="instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ Math.round(obj.avg * 10)/10 }}</a></td>
         </tr>
         {% endfor %}
       </tbody>
