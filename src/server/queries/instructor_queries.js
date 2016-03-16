@@ -1,7 +1,9 @@
 var knex = require("../../../db/knex");
 
 // *** Helpers *** //
+// Return all users that aren't admin
 var students = knex('users').where('admin', false).as('students');
+
 
 function StudentAvg() {
   return knex('student_feedback').avg('rating').groupBy('student_feedback.student_id').as('student_avg');
@@ -31,7 +33,7 @@ module.exports = {
         
     },
     
-     // Find the mean rating for each element of the curriculum for this type
+    // Find the mean rating for each element of the curriculum for this type
     allTypeAssessments : function(type, id) {
         
         return knex('users')
@@ -43,7 +45,7 @@ module.exports = {
         
     },
     
-     // Find the mean rating for each learning experience type
+    // Find the mean rating for each learning experience type
     avgAssessments : function() {
         
         return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
@@ -52,6 +54,7 @@ module.exports = {
       
     },
     
+    // Find all students and their avg feedback for all learning experiences
     allStudents : function() {
       
         return knex('student_feedback')
@@ -60,6 +63,31 @@ module.exports = {
         .groupBy('students.id', 'students.first', 'students.last')
         .orderBy('avg');
       
-    }
+    },
+    
+    // Find all learning experiences and match them up with any feedback (if present)
+    oneStudent : function(id) {
+        
+        // Find all the feedback for a student
+        var student = knex('users')
+                      .innerJoin('student_feedback', 'users.id', 'student_feedback.student_id')
+                      .where('users.id', id).as('student');
+        
+        return knex('curricula')
+        .innerJoin('types', 'curricula.type_id', 'types.id')
+        .leftJoin(student, 'curricula.id', 'student.curriculum_id')
+        .orderBy('curricula.assignmentDt', 'desc');
+      
+    },
+    
+    
+    avgAssessmentsForOneStudent : function(studentID) {
+        
+        return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
+        .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'curricula.type_id', 'types.id')
+        .where('student_feedback.student_id', studentID);
+        
+    },
 
 };
