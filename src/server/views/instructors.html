@@ -21,10 +21,10 @@
         <a href="/instructors/{{ type.type_id }}">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h3 class="panel-title">{{ type.type }} Average:</h3>
+            <h2 class="panel-title">{{ type.type }} Average:</h2>
           </div>
           <div class="panel-body center">
-            <h4>{{ Math.round(type.avg * 10)/10 }}</h4>
+            <h3 class='rating'>{{ Math.round(type.avg * 10)/10 }}</h3>
             
                  {% if type.avg < 3  %}
                   <span class="glyphicon glyphicon-fire orange" aria-hidden="true"></span>
