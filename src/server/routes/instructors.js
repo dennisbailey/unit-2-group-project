@@ -86,6 +86,7 @@ router.get('/student/:id', function(req, res, next){
   
 });
 
+// Drill down inside a learning experience type to a specific learning experience's feedback
 router.get('/:type/:id', function(req, res, next){
   
     queries.allTypeAssessments(req.params.type, req.params.id)
