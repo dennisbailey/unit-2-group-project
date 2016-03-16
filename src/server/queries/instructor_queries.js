@@ -1,5 +1,11 @@
 var knex = require("../../../db/knex");
 
+// *** Helpers *** //
+var students = knex('users').where('admin', false).as('students');
+
+function StudentAvg() {
+  return knex('student_feedback').avg('rating').groupBy('student_feedback.student_id').as('student_avg');
+}
 
 module.exports = {
     
@@ -40,9 +46,19 @@ module.exports = {
      // Find the mean rating for each learning experience type
     avgAssessments : function() {
         
-      return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
-      .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
-      .innerJoin('types', 'curricula.type_id', 'types.id');
+        return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
+        .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'curricula.type_id', 'types.id');
+      
+    },
+    
+    allStudents : function() {
+      
+        return knex('student_feedback')
+        .select('students.id', 'students.first', 'students.last').avg('student_feedback.rating')
+        .innerJoin(students, 'student_feedback.student_id', 'students.id')
+        .groupBy('students.id', 'students.first', 'students.last')
+        .orderBy('avg');
       
     }
 

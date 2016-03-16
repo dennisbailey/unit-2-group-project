@@ -16,16 +16,26 @@ function userName(user){
 // Populate /instructors with the average assessment score for each type
 router.get('/', function(req, res, next) {
     
-    queries.avgAssessments()
+    var promises = [];
+    
+    promises.push(queries.avgAssessments())
+    
+    promises.push(queries.allStudents())
+    
+    return Promise.all(promises)
+    
+//     queries.avgAssessments()
     
     .then( function (result) {
+      console.log(result);
         res.render('instructors', { title: 'Instructors',
-                                    data: result, 
+                                    data: result[0],
+                                    students: result[1], 
                                     name: userName(req.user) }
         );
     })
     
-    .catch( function ( error ) { return error; });
+    .catch( function ( error ) { console.log(error);return error; });
   
 });
 
