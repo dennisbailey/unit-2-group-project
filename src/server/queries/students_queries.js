@@ -41,9 +41,14 @@ module.exports = {
                             .whereNull('feedbackPresent.curriculum_id')
                             .as('feedbackNeeded');
       
+      var types = knex('types')
+      .select('types.id as type_id', 'types.type')
+      .as('types');
+
+
       //add the type description
         return knex(feedbackNeeded)
-        .innerJoin('types', 'types.id', 'feedbackNeeded.type_id');
+        .innerJoin(types, 'types.type_id', 'feedbackNeeded.type_id');
         
     },
 
@@ -62,7 +67,11 @@ module.exports = {
     },
     
 
+      insertFeedback: function(body){
 
+         return knex('student_feedback') 
+         .insert(body);
+    },
 
 
 
