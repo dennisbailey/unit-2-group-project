@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
     return Promise.all(promises)
     
     .then( function (result) {
-        console.log(result)
+    
         res.render('instructors', { title: 'Instructors',
                                     data: result[0],
                                     students: result[1], 
@@ -66,6 +66,27 @@ router.get('/:type', function(req, res, next){
     .catch( function ( error ) { return error; });
   
 });
+
+
+
+
+router.get('/:type/student/:id', function(req, res, next){
+ 
+    queries.avgTypeAssessmentsForOneStudent(req.params.type, req.params.id)
+    
+    .then( function (result) { 
+        console.log(result);
+        res.render('instructors-type-student', { title: 'Instructors',
+                                         data: result, 
+                                         name: userName(req.user) });
+    })
+    
+    .catch( function ( error ) { return error; });
+  
+});
+
+
+
 
 router.get('/student/:id', function(req, res, next){
     

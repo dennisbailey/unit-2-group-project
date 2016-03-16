@@ -34,6 +34,21 @@ module.exports = {
         
     },
     
+    // Find ratings for each learning experience rof this type for one student
+    avgTypeAssessmentsForOneStudent: function(type, id) {
+        
+        return knex('student_feedback')
+        .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'types.id', 'curricula.type_id')
+        .innerJoin('users', 'student_feedback.student_id', 'users.id')
+        .where('curricula.type_id', type)
+        .andWhere('student_feedback.student_id', id)
+        .orderBy('curricula.assignmentDt', 'desc');
+        
+    },
+    
+
+
     // Find the mean rating for each element of the curriculum for this type
     allTypeAssessments : function(type, id) {
         

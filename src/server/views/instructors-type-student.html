@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+ 
+    <div class="row">
+    	<div class="col-md-12">
+      	<h3>{{ data[0].first }} {{ data[0].last }}'s {{data[0].type }} Feedback</h3>
+    	</div>
+    </div>
+ 
+    <table class="table table-striped table-hover ">
+      
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+       {% for obj in data %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td><a href="/instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ obj.title }}</a></td>
+          <td>{{ obj.assignmentDt|date('Y-m-d') }}</td>
+          <td>{{ obj.rating }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    
+    </table> 
+
+  </div>
+
+{% endblock %}
