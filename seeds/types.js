@@ -9,7 +9,7 @@ exports.seed = function(knex, Promise) {
     knex('types').insert({type: 'Homework'}),
     knex('types').insert({type: 'Lecture'}),
     knex('types').insert({type: 'Project'}),
-    knex('types').insert({type: 'Stretch Goals'}),
+    knex('types').insert({type: 'Stretch Goal'}),
     knex('types').insert({type: 'Warmup'})
   );
 };
