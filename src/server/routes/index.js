@@ -110,10 +110,57 @@ router.get('/logout', function(req, res, next) {
     req.session = null;
     res.redirect('/');
 
-});
-
-
+ });
   
 });
 
+
+/////sorting index page
+
+router.get('/sortByTitle', function(req, res, next){
+
+ index_queries.allAssignmentsSortbyTitle()
+  .then(function(result){
+   res.render('index', { title: 'Home', status: req.session.length, data: result, name: userName(req.user)});
+  });
+  
+});
+
+
+router.get('/sortByInstructor', function(req, res, next){
+
+ index_queries.allAssignmentsSortByInstructor()
+  .then(function(result){
+   res.render('index', { title: 'Home', status: req.session.length, data: result, name: userName(req.user)});
+  });
+  
+});
+
+
+router.get('/sortByType', function(req, res, next){
+
+ index_queries.allAssignmentsSortByType()
+  .then(function(result){
+   res.render('index', { title: 'Home', status: req.session.length, data: result, name: userName(req.user)});
+  });
+  
+});
+
+
+router.get('/sortByDate', function(req, res, next){
+
+ index_queries.allAssignmentsSortByDate()
+  .then(function(result){
+   res.render('index', { title: 'Home', status: req.session.length, data: result, name: userName(req.user)});
+  });
+  
+});
+
+
+
+
+
 module.exports = router;
+
+
+
