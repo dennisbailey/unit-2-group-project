@@ -28,9 +28,9 @@
        {% for obj in data %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td><a href="instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ obj.title }}</a></td>
+          <td><a href="/instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ obj.title }}</a></td>
           <td>{{ obj.assignmentDt|date('Y-m-d') }}</td>
-          <td><a href="instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ Math.round(obj.avg * 10)/10 }}</a></td>
+          <td><a href="/instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ Math.round(obj.avg * 10)/10 }}</a></td>
         </tr>
         {% endfor %}
       </tbody>
