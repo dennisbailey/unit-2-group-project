@@ -25,14 +25,30 @@ module.exports = {
     avgTypeAssessments : function(type) {
         
         return knex('student_feedback')
-        .select('curricula.id','curricula.type_id', 'curricula.title', 'curricula.assignmentDt').avg('student_feedback.rating')
+        .select('curricula.id','curricula.type_id', 'curricula.title', 'curricula.assignmentDt', 'types.type').avg('student_feedback.rating')
         .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'types.id', 'curricula.type_id')
         .where('curricula.type_id', type)
-        .groupBy('curricula.id', 'curricula.type_id','curricula.title', 'curricula.assignmentDt')
+        .groupBy('curricula.id', 'curricula.type_id','curricula.title', 'curricula.assignmentDt', 'types.type')
         .orderBy('curricula.assignmentDt', 'desc');
         
     },
     
+    // Find ratings for each learning experience rof this type for one student
+    avgTypeAssessmentsForOneStudent: function(type, id) {
+        
+        return knex('student_feedback')
+        .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'types.id', 'curricula.type_id')
+        .innerJoin('users', 'student_feedback.student_id', 'users.id')
+        .where('curricula.type_id', type)
+        .andWhere('student_feedback.student_id', id)
+        .orderBy('curricula.assignmentDt', 'desc');
+        
+    },
+    
+
+
     // Find the mean rating for each element of the curriculum for this type
     allTypeAssessments : function(type, id) {
         

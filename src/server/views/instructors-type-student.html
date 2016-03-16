@@ -9,7 +9,7 @@
  
     <div class="row">
     	<div class="col-md-12">
-      	<h3>{{data[0].type }}  Feedback from all students</h3>
+      	<h3>{{ data[0].first }} {{ data[0].last }}'s {{data[0].type }} Feedback</h3>
     	</div>
     </div>
  
@@ -20,7 +20,7 @@
           <th>#</th>
           <th>Title</th>
           <th>Date</th>
-          <th>Average</th>
+          <th>Rating</th>
         </tr>
       </thead>
       
@@ -30,7 +30,7 @@
           <td>{{ loop.index }}</td>
           <td><a href="/instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ obj.title }}</a></td>
           <td>{{ obj.assignmentDt|date('Y-m-d') }}</td>
-          <td><a href="/instructors/{{ obj.type_id }}/{{ obj.id }}" alt="{{ obj.title }}">{{ Math.round(obj.avg * 10)/10 }}</a></td>
+          <td>{{ obj.rating }}</td>
         </tr>
         {% endfor %}
       </tbody>

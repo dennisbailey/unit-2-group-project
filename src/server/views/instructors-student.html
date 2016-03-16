@@ -14,10 +14,11 @@
     </div>
     
     <div class="row">
+    
       
       {% for type in summary %}
       <div class="col-md-4">
-        <a href="/instructors/{{ type.type_id }}">
+        <a href="/instructors/{{ type.type_id }}/student/{{ data[0].student_id }}">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h3 class="panel-title">{{ type.type }} Average:</h3>
