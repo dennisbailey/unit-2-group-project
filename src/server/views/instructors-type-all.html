@@ -29,7 +29,7 @@
        {% for obj in data %}
         <tr>
           <td>{{ loop.index }}</td>
-          <td>{{ obj.first}} {{ obj.last }}</td>
+          <td><a href="/instructors/student/{{ obj.student_id }}">{{ obj.first}} {{ obj.last }}</a></td>
           
           {% if obj.rating > 3 %}
           <td class="success">{{ obj.rating }}</td>

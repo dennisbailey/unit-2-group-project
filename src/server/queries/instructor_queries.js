@@ -25,10 +25,11 @@ module.exports = {
     avgTypeAssessments : function(type) {
         
         return knex('student_feedback')
-        .select('curricula.id','curricula.type_id', 'curricula.title', 'curricula.assignmentDt').avg('student_feedback.rating')
+        .select('curricula.id','curricula.type_id', 'curricula.title', 'curricula.assignmentDt', 'types.type').avg('student_feedback.rating')
         .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'types.id', 'curricula.type_id')
         .where('curricula.type_id', type)
-        .groupBy('curricula.id', 'curricula.type_id','curricula.title', 'curricula.assignmentDt')
+        .groupBy('curricula.id', 'curricula.type_id','curricula.title', 'curricula.assignmentDt', 'types.type')
         .orderBy('curricula.assignmentDt', 'desc');
         
     },

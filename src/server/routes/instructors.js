@@ -25,6 +25,7 @@ router.get('/', function(req, res, next) {
     return Promise.all(promises)
     
     .then( function (result) {
+        console.log(result)
         res.render('instructors', { title: 'Instructors',
                                     data: result[0],
                                     students: result[1], 
@@ -52,10 +53,11 @@ router.get('/all', function(req, res, next){
 });
 
 router.get('/:type', function(req, res, next){
-
+  console.log(req.params.type)
     queries.avgTypeAssessments(req.params.type)
     
     .then( function (result) { 
+        console.log(result);
         res.render('instructors-type', { title: 'Instructors',
                                          data: result, 
                                          name: userName(req.user) });
@@ -76,6 +78,7 @@ router.get('/student/:id', function(req, res, next){
     return Promise.all(promises)
     
     .then( function (result) {
+      console.log(result)
         res.render('instructors-student', { title: 'Instructors',
                                              summary: result[0],
                                              data: result[1], 
@@ -92,6 +95,7 @@ router.get('/:type/:id', function(req, res, next){
     queries.allTypeAssessments(req.params.type, req.params.id)
     
     .then( function (result) { 
+
         res.render('instructors-type-all', { title: 'Instructors',
                                              data: result, 
                                              name: userName(req.user) });
