@@ -35,9 +35,11 @@ module.exports = {
     
     avgAssessments : function() {
         
-      return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
+      return knex('student_feedback')
+      .select('type', 'type_id').avg('rating')
       .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
-      .innerJoin('types', 'curricula.type_id', 'types.id');
+      .innerJoin('types', 'curricula.type_id', 'types.id')
+      .groupBy('type_id', 'type');
       
     }
 

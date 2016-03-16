@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var queries = require('../queries/instructor_queries');
 
-
-
+// *** Helper Functions *** //
+// If a user name exists, assign it to var name so it can be passed to swig
 function userName(user){
   var name = '';
   if(user){
@@ -12,16 +12,17 @@ function userName(user){
   return name;
 }
 
-
-
-
+// *** Routes *** //
+// Populate /instructors with the average assessment score for each type
 router.get('/', function(req, res, next) {
     
     queries.avgAssessments()
     
     .then( function (result) { 
         res.render('instructors', { title: 'Instructors',
-                                    data: result, name: userName(req.user) });
+                                    data: result, 
+                                    name: userName(req.user) }
+        );
     })
     
     .catch( function ( error ) { return error; });
