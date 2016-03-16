@@ -43,9 +43,9 @@ router.get('/all', function(req, res, next){
   
 });
 
-router.get('/:id', function(req, res, next){
+router.get('/:type', function(req, res, next){
 
-    queries.allTypeAssessments(req.params.id)
+    queries.allTypeAssessments(req.params.type)
     
     .then( function (result) { 
       console.log(result);
