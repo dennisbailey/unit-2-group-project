@@ -6,38 +6,45 @@
 {% block content %}
 
   <div class="container">
+
+      <div class="row">
+        <div class="col-md-12 center">
+          <h3>Look at How Much You've Accomplished</h3>
+          <br>
+        </div>
+      </div>
  
-    <table class="table table-striped table-hover ">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Title</th>
-      <th>Type</th>
-      <th>Rating</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody>
-   {% for row in data %}
-    <tr>
-      <td>{{ loop.index }}</td>
-      <td><a href="{{ row.link }}" alt="{{ row.title }}">{{ row.title }}</a></td>
-      <td><a href="/students/{{ row.type_id }}">{{ row.type }}</a></td>
+        <table class="table table-striped table-hover ">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Type</th>
+          <th>Rating</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+       {% for row in data %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td><a href="{{ row.link }}" alt="{{ row.title }}">{{ row.title }}</a></td>
+          <td><a href="/students/{{ row.type_id }}">{{ row.type }}</a></td>
 
-     {% if row.rating > 0 %}
+         {% if row.rating > 0 %}
 
-      <td>{{ row.rating }}</td>
+          <td>{{ row.rating }}</td>
 
-      {%  else %}
+          {%  else %}
 
-      <td><a href="/students/all/{{ row.id }}">Rate now</a></td>
+          <td><a href="/students/all/{{ row.id }}">Rate now</a></td>
 
-      {% endif %}
-      <td>{{ row.assignmentDt|date('Y-m-d') }}</td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table> 
+          {% endif %}
+          <td>{{ row.assignmentDt|date('Y-m-d') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table> 
 
   </div>
 
