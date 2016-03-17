@@ -2,6 +2,8 @@
 
 $(document).on('ready', function() {
   console.log('sanity check!');
+  
+  $('#datepicker').val(new Date().toDateInputValue());
 });
 
 var password = document.getElementById("password")
