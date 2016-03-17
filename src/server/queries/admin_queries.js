@@ -80,7 +80,26 @@ module.exports = {
      return knex('instructors')
      .where('id', id)
      .update(object);
+   }, 
+
+   allUsers : function(){
+      return knex('users')
+      .orderBy('admin', 'desc','last', 'asc');  
+   },
+
+   removeAdmin : function(id){
+     return knex('users')
+     .where('id', id)
+     .update({ admin : false});
+   },
+
+   makeAdmin : function(id){
+     return knex('users')
+     .where('id', id)
+     .update({ admin : true });
    }
+
+
 
 
 

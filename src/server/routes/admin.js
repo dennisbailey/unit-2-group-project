@@ -232,4 +232,62 @@ router.post('/instructor/edit/:id', function(req, res, next) {
 
 
 
+
+router.get('/users', function(req, res, next){
+
+    queries.allUsers()
+  
+    .then(function(result) {
+        res.render('users', { title: 'Admin', 
+                              status: req.session.length, 
+                              data: result });
+    })
+    
+    .catch( function (error) { 
+      
+      return error; });
+
+});
+
+
+
+
+router.get('/users/:id/revoke', function(req, res, next) {
+    
+    queries.removeAdmin(req.params.id)
+    
+    .then(function (result) {  
+        res.redirect('/admin/users');
+    })
+    
+    .catch( function ( result ) { return result; });
+
+    
+});
+
+router.get('/users/:id/grant', function(req, res, next) {
+    
+    queries.makeAdmin(req.params.id)
+    
+    .then(function (result) {  
+        res.redirect('/admin/users');
+    })
+    
+    .catch( function ( result ) { 
+     console.log(result)
+      return result; });
+
+    
+});
+
+
+
+
+
+
+
+
+
+
+
 module.exports = router;
