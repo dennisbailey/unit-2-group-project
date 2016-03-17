@@ -56,11 +56,31 @@ module.exports = {
    deleteOneAssignments : function(id){
      return knex('curricula')
      .where('id', id)
-     .delete();
-   
+     .delete();   
+   },
+
+   addnewInstructor : function(object){
+     return knex('instructors')
+     .insert(object);
+   },
+
+   deleteOneInstructor : function(id){
+     return knex('instructors')
+     .where('id', id)
+     .delete();   
+   },
+
+
+   showOneInstructor : function(id){
+     return knex('instructors')
+     .where('id', id);   
+   },
+
+   editOneInstructor : function(id, object){
+     return knex('instructors')
+     .where('id', id)
+     .update(object);
    }
-
-
 
 
 
