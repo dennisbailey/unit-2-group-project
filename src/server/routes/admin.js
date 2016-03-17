@@ -6,7 +6,7 @@ var helpers = require('../lib/helpers');
 
 
 // *** Routes *** //
-
+// Show the entire curriculum
 router.get('/curriculum', function(req, res, next){
 
     queries.allAssignments()
@@ -24,12 +24,7 @@ router.get('/curriculum', function(req, res, next){
 });
 
 
-
-
-
-
-
-// Show the add to curriculum route
+// Prepopulate the add to curriculum page with values from the database
 router.get('/curriculum/add', function(req, res, next) {
     
     var promises = [];
@@ -55,7 +50,8 @@ router.get('/curriculum/add', function(req, res, next) {
     
 });
 
-// POST to add to the curriculum Registration and check for a unique email
+
+// Add a Learning Experience to the curriculum
 router.post('/curriculum/add', function(req, res, next) {
     
     queries.addLearningExperience(req.body)
@@ -72,20 +68,16 @@ router.post('/curriculum/add', function(req, res, next) {
     
 
 
-
-router.post('/curriculum/delete/:id', function(req, res, next) {
-    console.log('hello');
+// Delete a Learning Experience
+router.get('/curriculum/delete/:id', function(req, res, next) {
+    
     queries.deleteOneAssignments(req.params.id)
     
     .then(function (result) {  
-        res.render('curriculum', { title: 'Add To Curriculum',
-                                  message: ' Learning Experience deleted from the Curriculum' });
-      
+        res.redirect('/admin/curriculum');
     })
     
-    .catch( function ( result ) { 
-      console.log(result);
-      return result; });
+    .catch( function ( result ) { return result; });
     
 });
     
