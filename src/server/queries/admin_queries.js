@@ -40,7 +40,7 @@ module.exports = {
 
     showOneAssignment : function(id){
       return knex('curricula')
-      .select('curricula.title', 'instructors.first', 'instructors.last', 'types.type', 'topics.topic', 'curricula.assignmentDt', 'curricula.feedbackDt','curricula.id as curriculum_id')
+      .select('curricula.title', 'instructors.first', 'instructors.last', 'types.type', 'topics.topic', 'curricula.assignmentDt', 'curricula.link', 'curricula.feedbackDt','curricula.id as curriculum_id', 'curricula.topic_id', 'curricula.instructor_id', 'curricula.type_id')
       .innerJoin('types', 'types.id', 'curricula.type_id')
       .innerJoin('topics', 'topics.id', 'curricula.topic_id')
       .leftOuterJoin('instructors', 'instructors.id', 'curricula.instructor_id')

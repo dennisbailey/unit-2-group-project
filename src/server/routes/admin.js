@@ -24,11 +24,8 @@ router.get('/curriculum', function(req, res, next){
 });
 
 
-<<<<<<< HEAD
-// Show the add to curriculum route
-=======
+
 // Prepopulate the add to curriculum page with values from the database
->>>>>>> upstream/master
 router.get('/curriculum/add', function(req, res, next) {
     
     var promises = [];
@@ -49,12 +46,8 @@ router.get('/curriculum/add', function(req, res, next) {
                                        topics: result[2] });
       
     })
-    
-<<<<<<< HEAD
-    .catch( function ( result ) { console.log(result); return result; });
-=======
+
     .catch( function ( result ) { return result; })
->>>>>>> upstream/master
     
 });
 
