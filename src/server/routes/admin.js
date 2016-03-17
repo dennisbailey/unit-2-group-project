@@ -1,13 +1,37 @@
 var express = require('express');
 var router = express.Router();
-var queries = require('../queries/add_queries');
+var queries = require('../queries/admin_queries');
 var passport = require('../lib/auth');
 var helpers = require('../lib/helpers');
 
 
 // *** Routes *** //
+
+router.get('/curriculum', function(req, res, next){
+
+    queries.allAssignments()
+  
+    .then(function(result) {
+        res.render('curriculum', { title: 'Admin', 
+                              status: req.session.length, 
+                              data: result });
+    })
+    
+    .catch( function (error) { 
+      console.log(error
+        )
+      return error; });
+
+});
+
+
+
+
+
+
+
 // Show the add to curriculum route
-router.get('/curriculum', function(req, res, next) {
+router.get('/curriculum/add', function(req, res, next) {
     
     var promises = [];
     
@@ -21,7 +45,7 @@ router.get('/curriculum', function(req, res, next) {
     
     .then( function (result) {  
 
-        res.render('add-curriculum', { title: 'Add To Curriculum',
+        res.render('curriculum-add', { title: 'Add To Curriculum',
                                        instructors: result[0],
                                        types: result[1],
                                        topics: result[2] });
@@ -33,12 +57,12 @@ router.get('/curriculum', function(req, res, next) {
 });
 
 // POST to add to the curriculum Registration and check for a unique email
-router.post('/curriculum', function(req, res, next) {
+router.post('/curriculum/add', function(req, res, next) {
     
     queries.addLearningExperience(req.body)
     
     .then(function (result) {  
-        res.render('add-curriculum', { title: 'Add To Curriculum',
+        res.render('curriculum-add', { title: 'Add To Curriculum',
                                        message: 'New Learning Experience Added to the Curriculum' });
       
     })
@@ -47,7 +71,12 @@ router.post('/curriculum', function(req, res, next) {
     
 });
     
-    
+  
+
+
+
+
+
 
 
 
