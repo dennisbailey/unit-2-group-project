@@ -15,7 +15,7 @@
     </div>
     {% endif %}
     
-    <form class="form-horizontal" method="POST" action="/admin/curriculum/add">
+    <form class="form-horizontal" method="POST" action="/admin/curriculum/edit/{{ values.curriculum_id }}">
     <fieldset>
     
     <!-- Form Name -->
@@ -99,7 +99,7 @@
     <div class="form-group">
       <label class="col-md-4 control-label" for="singlebutton">Add This Learning Experience</label>
       <div class="col-md-4">
-        <button type="submit" id="singlebutton" class="btn btn-primary">Add</button>
+        <button type="submit" id="singlebutton" class="btn btn-primary">Edit</button>
       </div>
     </div>
     

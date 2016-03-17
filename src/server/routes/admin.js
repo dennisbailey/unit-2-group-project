@@ -98,7 +98,6 @@ router.get('/curriculum/edit/:id', function(req, res, next) {
     return Promise.all(promises)
     
     .then( function (result) {  
-        console.log(result);
         res.render('curriculum-edit', { title: 'Edit This Learning Experience',
                                        instructors: result[0],
                                        types: result[1],
@@ -114,14 +113,14 @@ router.get('/curriculum/edit/:id', function(req, res, next) {
 
 // Submit edits a Learning Experience
 router.post('/curriculum/edit/:id', function(req, res, next) {
+console.log(req.body);    
+//     queries.editOneAssignment(req.params.id, req.body)
     
-    queries.editOneAssignment(req.params.id)
-    
-    .then(function (result) {  
-        res.redirect('/admin/curriculum');
-    })
-    
-    .catch( function ( result ) { return result; });
+//     .then(function (result) {  
+//         res.redirect('/admin/curriculum');
+//     })
+//     
+//     .catch( function ( result ) { return result; });
     
 });
     
