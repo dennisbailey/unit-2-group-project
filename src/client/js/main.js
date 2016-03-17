@@ -14,8 +14,21 @@ $(document).on('ready', function() {
       
       // Insert today's date as the default value for the review page date picker
       document.getElementById('datepicker0').value = new Date().toDateInputValue();
-      document.getElementById('datepicker1').value = new Date().toDateInputValue();
-  
+      
+      // Find a date three dates after today's date
+      var someDate = new Date();
+      var numberOfDaysToAdd = 3;
+      var futureDate = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+      
+      var dd = someDate.getDate();
+      var y = someDate.getFullYear();
+      var m = someDate.getMonth() + 1;
+      var mm;
+      
+      if ( m < 10 ) { mm = '0' + m; } else{ mm = m; }
+
+      var futureDate = y + '-'+ mm + '-'+ dd;
+      document.getElementById('datepicker1').value = futureDate;  
   }});
 
 var password = document.getElementById("password")
