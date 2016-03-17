@@ -39,16 +39,18 @@ module.exports = {
       var feedbackNeeded =  knex('curricula')
                             .leftJoin(feedbackPresent, 'curricula.id', 'feedbackPresent.curriculum_id')
                             .whereNull('feedbackPresent.curriculum_id')
+                            .orderBy('curricula.feedbackDt', 'asc')
                             .as('feedbackNeeded');
       
       var types = knex('types')
-      .select('types.id as type_id', 'types.type')
-      .as('types');
+                  .select('types.id as type_id', 'types.type')
+                  .as('types');
 
 
       //add the type description
         return knex(feedbackNeeded)
-        .innerJoin(types, 'types.type_id', 'feedbackNeeded.type_id');
+        .innerJoin(types, 'types.type_id', 'feedbackNeeded.type_id')
+        .limit(10);
         
     },
 

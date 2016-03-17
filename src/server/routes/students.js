@@ -60,6 +60,7 @@ router.get('/', function(req, res, next) {
     queries.allUnratedForOneStudent(req.user.id)
 
     .then(function(result){
+      console.log(result);
         res.render('students', { title: 'students',
                                  data: result,
                                  name: userName(req.user) });
