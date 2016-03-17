@@ -18,7 +18,7 @@ function userName(user){
 // *** Routes *** //
 // Populate the homepage with all the assignments
 router.get('/', function(req, res, next) {
-  
+
     index_queries.allAssignments()
   
     .then(function(result) {
