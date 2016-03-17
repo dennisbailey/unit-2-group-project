@@ -45,7 +45,9 @@
       <div class="col-md-4">
         <select id="instructor_id" name="instructor_id" class="form-control">
           <option value="{{ values.instructor_id }}">{{ values.first }} {{ values.last }}</option>
+          <option value='0'>no instructor</option>
           {% for instructor in instructors %}
+
             <option value="{{ instructor.id }}">{{ instructor.first }} {{ instructor.last }}</option>
           {% endfor %}
         </select>

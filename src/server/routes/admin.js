@@ -115,14 +115,16 @@ router.get('/curriculum/edit/:id', function(req, res, next) {
 
 // Submit edits a Learning Experience
 router.post('/curriculum/edit/:id', function(req, res, next) {
-console.log(req.body);    
-//     queries.editOneAssignment(req.params.id, req.body)
+    queries.editOneAssignment(req.params.id, req.body)
     
-//     .then(function (result) {  
-//         res.redirect('/admin/curriculum');
-//     })
-//     
-//     .catch( function ( result ) { return result; });
+    .then(function (result) {  
+
+        res.redirect('/admin/curriculum');
+    })
+    
+    .catch( function ( result ) { 
+      console.log(result)
+      return result; });
     
 });
     

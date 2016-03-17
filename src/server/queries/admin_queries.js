@@ -47,19 +47,20 @@ module.exports = {
       .where('curricula.id', id)
    },
    
-   editOneAssignment : function(id){
+   editOneAssignment : function(id, object){
      return knex('curricula')
      .where('id', id)
-     .delete();
+     .update(object);
    },
    
    deleteOneAssignments : function(id){
-     
      return knex('curricula')
      .where('id', id)
      .delete();
    
    }
+
+
 
 
 
