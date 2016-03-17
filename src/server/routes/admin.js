@@ -46,7 +46,7 @@ router.get('/curriculum/add', function(req, res, next) {
       
     })
     
-    .catch( function ( result ) { console.log(result); return result; })
+    .catch( function ( result ) { return result; })
     
 });
 
@@ -80,14 +80,51 @@ router.get('/curriculum/delete/:id', function(req, res, next) {
     .catch( function ( result ) { return result; });
     
 });
+
+
+// Show the edit page for a Learning Experience
+router.get('/curriculum/edit/:id', function(req, res, next) {
     
+    var promises = [];
+    
+    promises.push(queries.allInstructors());
+    
+    promises.push(queries.allTypes());
+    
+    promises.push(queries.allTopics());
+    
+    promises.push(queries.showOneAssignment(req.params.id));
+    
+    return Promise.all(promises)
+    
+    .then( function (result) {  
+        console.log(result);
+        res.render('curriculum-edit', { title: 'Edit This Learning Experience',
+                                       instructors: result[0],
+                                       types: result[1],
+                                       topics: result[2],
+                                       values: result[3][0] });
+      
+    })
+    
+    .catch( function ( result ) { return result; });
+    
+});
 
 
-
-
-
-
-
+// Submit edits a Learning Experience
+router.post('/curriculum/edit/:id', function(req, res, next) {
+    
+    queries.editOneAssignment(req.params.id)
+    
+    .then(function (result) {  
+        res.redirect('/admin/curriculum');
+    })
+    
+    .catch( function ( result ) { return result; });
+    
+});
+    
 
 
 module.exports = router;

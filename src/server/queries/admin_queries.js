@@ -38,10 +38,27 @@ module.exports = {
   },
 
 
-    deleteOneAssignments : function(id){
+    showOneAssignment : function(id){
+      return knex('curricula')
+//       .select('curricula.title', 'instructors.first', 'types.type', 'curricula.assignmentDt', 'curricula.id as curriculum_id')
+      .innerJoin('types', 'types.id', 'curricula.type_id')
+      .innerJoin('topics', 'topics.id', 'curricula.topic_id')
+      .leftOuterJoin('instructors', 'instructors.id', 'curricula.instructor_id')
+      .where('curricula.id', id)
+   },
+   
+   editOneAssignment : function(id){
      return knex('curricula')
      .where('id', id)
      .delete();
+   },
+   
+   deleteOneAssignments : function(id){
+     
+     return knex('curricula')
+     .where('id', id)
+     .delete();
+   
    }
 
 

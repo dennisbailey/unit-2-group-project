@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+
+  <div class="container">
+    
+    {% if message %}
+    <br>
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert"></button>
+      <h4>Success! {{ message }}</h4>
+    </div>
+    {% endif %}
+    
+    <form class="form-horizontal" method="POST" action="/admin/curriculum/add">
+    <fieldset>
+    
+    <!-- Form Name -->
+    <legend>Edit This Learning Experience</legend>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="title">Title *</label>  
+      <div class="col-md-6">
+      <input id="title" name="title" type="text" value="{{ values.title }}" class="form-control input-md" required="">
+        
+      </div>
+    </div>
+    
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="link">Link</label>  
+      <div class="col-md-6">
+      <input id="link" name="link" type="text" value="{{ values.link }}" class="form-control input-md">
+        
+      </div>
+    </div>
+    
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="instructor_id">Instructor</label>
+      <div class="col-md-4">
+        <select id="instructor_id" name="instructor_id" class="form-control">
+          <option value="{{ values.instructor_id }}">{{ values.first }} {{ values.last }}</option>
+          {% for instructor in instructors %}
+            <option value="{{ instructor.id }}">{{ instructor.first }} {{ instructor.last }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    
+    
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="type_id">Type *</label>
+      <div class="col-md-4">
+        <select id="type_id" name="type_id" class="form-control">
+          <option value="{{ values.type_id }}">{{ values.type }}</option>
+          {% for type in types %}
+            <option value="{{ type.id }}">{{ type.type }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    
+    <!-- Select Basic -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="topic_id">Topic *</label>
+      <div class="col-md-4">
+        <select id="topic_id" name="topic_id" class="form-control">
+            
+          <option value="{{ values.topic_id }}">{{ values.topic }}</option>
+          {% for topic in topics %}
+            <option value="{{ topic.id }}">{{ topic.topic }}</option>
+          {% endfor %}
+
+        </select>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="link">Learning Experience Date *</label>  
+      <div class="col-md-6">
+       <input type="date" class="datepicker" value="{{ values.assignmentDt|date('Y-m-d') }}" name="assignmentDt" required="">      
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="link">Feedback Date *</label>  
+      <div class="col-md-6">
+       <input type="date" class="datepicker" value="{{ values.feedbackDt|date('Y-m-d') }}" name="feedbackDt" required="">      
+      </div>
+    </div>
+    
+    <!-- Button -->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="singlebutton">Add This Learning Experience</label>
+      <div class="col-md-4">
+        <button type="submit" id="singlebutton" class="btn btn-primary">Add</button>
+      </div>
+    </div>
+    
+    
+    </fieldset>
+    </form>
+    
+    <h4 class="center">* are required to submit</h4>
+    
+  </div>
+
+{% endblock %}
