@@ -46,9 +46,32 @@ app.use(express.static(path.join(__dirname, '../client')));
 
 // *** main routes *** //
 app.use('/', routes);
-// app.use('/students', students );
-app.use('/instructors', instructors);
+
+// Routes protected by a login
+app.use(function(req, res, next) {
+  
+  if (req.cookies.user) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+  
+});
+
 app.use('/students', students);
+
+// Routes protected by an admin login
+app.use(function(req, res, next) {
+  
+  if (req.cookies.user.admin) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+  
+});
+
+app.use('/instructors', instructors);
 
 
 // catch 404 and forward to error handler
