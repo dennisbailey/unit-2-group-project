@@ -45,7 +45,9 @@
       <div class="col-md-4">
         <select id="instructor_id" name="instructor_id" class="form-control">
           <option value="{{ values.instructor_id }}">{{ values.first }} {{ values.last }}</option>
+          <option value='0'>no instructor</option>
           {% for instructor in instructors %}
+
             <option value="{{ instructor.id }}">{{ instructor.first }} {{ instructor.last }}</option>
           {% endfor %}
         </select>
@@ -97,7 +99,7 @@
     
     <!-- Button -->
     <div class="form-group">
-      <label class="col-md-4 control-label" for="singlebutton">Add This Learning Experience</label>
+      <label class="col-md-4 control-label" for="singlebutton">Edit This Learning Experience</label>
       <div class="col-md-4">
         <button type="submit" id="singlebutton" class="btn btn-primary">Edit</button>
       </div>

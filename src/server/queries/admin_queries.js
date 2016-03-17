@@ -40,25 +40,46 @@ module.exports = {
 
     showOneAssignment : function(id){
       return knex('curricula')
-      .select('curricula.title', 'instructors.first', 'instructors.last', 'types.type', 'topics.topic', 'curricula.assignmentDt', 'curricula.feedbackDt','curricula.id as curriculum_id')
+      .select('curricula.title', 'instructors.first', 'instructors.last', 'types.type', 'topics.topic', 'curricula.assignmentDt', 'curricula.link', 'curricula.feedbackDt','curricula.id as curriculum_id', 'curricula.topic_id', 'curricula.instructor_id', 'curricula.type_id')
       .innerJoin('types', 'types.id', 'curricula.type_id')
       .innerJoin('topics', 'topics.id', 'curricula.topic_id')
       .leftOuterJoin('instructors', 'instructors.id', 'curricula.instructor_id')
       .where('curricula.id', id)
    },
    
-   editOneAssignment : function(id){
+   editOneAssignment : function(id, object){
      return knex('curricula')
      .where('id', id)
-     .delete();
+     .update(object);
    },
    
    deleteOneAssignments : function(id){
-     
      return knex('curricula')
      .where('id', id)
-     .delete();
-   
+     .delete();   
+   },
+
+   addnewInstructor : function(object){
+     return knex('instructors')
+     .insert(object);
+   },
+
+   deleteOneInstructor : function(id){
+     return knex('instructors')
+     .where('id', id)
+     .delete();   
+   },
+
+
+   showOneInstructor : function(id){
+     return knex('instructors')
+     .where('id', id);   
+   },
+
+   editOneInstructor : function(id, object){
+     return knex('instructors')
+     .where('id', id)
+     .update(object);
    }
 
 

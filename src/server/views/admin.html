@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+    
+    <h2 class='center'>Welcome to Admin</h2>
+    <div class="row">
+
+      <div class="col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h2 class="admin-title">Curricula</h2>
+          </div>
+          <div class="panel-body">
+          <ul>
+            <li class="admin-li"><a href="/admin/curriculum">View All</a></li>
+            <li class="admin-li"><a href="/admin/curriculum/add">Add New</a></li>
+            <li class="admin-li"><a href="/admin/curriculum">Edit/Delete</a></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h2 class="admin-title">Instructors</h2>
+          </div>
+          <div class="panel-body">
+          <ul>
+            <li class="admin-li"><a href="/admin/instructor">View All</a></li>
+            <li class="admin-li"><a href="/admin/instructor/add">Add New</a></li>
+            <li class="admin-li"><a href="/admin/instructor">Edit/Delete</a></li>
+          </ul>
+          </div>
+        </div>
+      </div>
+ 
+
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h2 class="admin-title">Admins</h2>
+          </div>
+          <div class="panel-body">
+          <ul>
+            <li class="admin-li"><a href="/admin/users">View All</a></li>
+            <li class="admin-li"><a href="/admin/users/add">Add New</a></li>
+            <li class="admin-li"><a href="/admin/users">Edit/Delete</a></li>
+          </ul>
+          </div>
+        </div>
+      </div> 
+    
+
+  </div>
+
+{% endblock %}
