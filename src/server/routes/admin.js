@@ -6,6 +6,23 @@ var helpers = require('../lib/helpers');
 
 
 // *** Routes *** //
+router.get('/', function(req, res, next){
+
+
+  res.render('admin', { title: 'Admin',
+                        status:req.session.length
+                        });
+
+});
+
+
+
+
+
+
+
+
+
 // Show the entire curriculum
 router.get('/curriculum', function(req, res, next){
 

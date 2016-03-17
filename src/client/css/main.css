@@ -41,3 +41,13 @@ table{
   font-weight: 500;
   font-size: 2em;
 }
+
+.admin-li{
+  font-size: 2em;
+  line-height: 150%;
+  color: #2780e3;
+}
+
+.admin-title{
+  margin: 0 ;
+}
