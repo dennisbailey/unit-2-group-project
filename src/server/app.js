@@ -15,6 +15,7 @@ var helpers = require('./lib/helpers.js');
 var routes = require('./routes/index.js');
 var instructors = require('./routes/instructors.js');
 var students = require('./routes/students.js');
+var add = require('./routes/add.js')
 
 // *** express instance *** //
 var app = express();
@@ -72,6 +73,7 @@ app.use('/students', students);
 // });
 
 app.use('/instructors', instructors);
+app.use('/add', add);
 
 
 // catch 404 and forward to error handler
