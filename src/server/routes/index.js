@@ -18,13 +18,18 @@ function userName(user){
 // *** Routes *** //
 // Populate the homepage with all the assignments
 router.get('/', function(req, res, next) {
+  
     index_queries.allAssignments()
   
-    .then(function(result){
+    .then(function(result) {
         res.render('index', { title: 'Home', 
                               status: req.session.length, 
                               data: result, 
                               name: userName(req.user) });
+    })
+    
+    .catch( function (error) { return error; });
+
 });
 
 
@@ -118,7 +123,7 @@ router.get('/sortByTitle', function(req, res, next){
 
     index_queries.allAssignmentsSortbyTitle()
     
-    .then(function(result){
+    .then(function(result) {
         res.render('index', { title: 'Home', 
                               status: req.session.length, 
                               data: result, 
@@ -133,7 +138,7 @@ router.get('/sortByInstructor', function(req, res, next){
 
     index_queries.allAssignmentsSortByInstructor()
     
-    .then(function(result){
+    .then(function(result) {
         res.render('index', { title: 'Home', 
                               status: req.session.length, 
                               data: result, 
@@ -148,7 +153,7 @@ router.get('/sortByType', function(req, res, next){
 
     index_queries.allAssignmentsSortByType()
     
-    .then(function(result){
+    .then(function(result) {
         res.render('index', { title: 'Home', 
                               status: req.session.length, 
                               data: result, 
@@ -163,7 +168,7 @@ router.get('/sortByDate', function(req, res, next){
 
     index_queries.allAssignmentsSortByDate()
     
-    .then(function(result){
+    .then(function(result) {
         res.render('index', { title: 'Home', 
                               status: req.session.length, 
                               data: result, 
