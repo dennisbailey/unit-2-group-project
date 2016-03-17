@@ -40,6 +40,7 @@ router.get('/registration', function(req, res, next) {
 
 });
 
+// Submit Registration and check for a unique email
 router.post('/registration', function(req, res, next) {
     
     var newUser = req.body;
