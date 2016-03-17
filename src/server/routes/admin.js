@@ -18,15 +18,10 @@ router.get('/curriculum', function(req, res, next){
     })
     
     .catch( function (error) { 
-      console.log(error)
+      console.log(error);
       return error; });
 
 });
-
-
-
-
-
 
 
 // Show the add to curriculum route
@@ -51,7 +46,7 @@ router.get('/curriculum/add', function(req, res, next) {
       
     })
     
-    .catch( function ( result ) { console.log(result); return result; })
+    .catch( function ( result ) { console.log(result); return result; });
     
 });
 
@@ -79,12 +74,12 @@ router.post('/curriculum/delete/:id', function(req, res, next) {
     
     .then(function (result) {  
         res.render('curriculum', { title: 'Add To Curriculum',
-                                  message: ' Learning Experience deleted from the Curriculum' });
+                                  message: 'Learning Experience deleted from the Curriculum' });
       
     })
     
     .catch( function ( result ) { 
-      console.log(result);
+      // console.log(result);
       return result; });
     
 });
