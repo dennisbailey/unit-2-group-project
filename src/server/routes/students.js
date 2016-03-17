@@ -74,13 +74,21 @@ router.get('/', function(req, res, next) {
 // This GET route shows a student all of the learning experiences and attaches a rating if present
 // If there's no rating, the learning experience will offer them a link back to the assesments page
 router.get('/all', function(req, res, next){
+     var id =req.user.id;
+    var promises = [];
 
-    queries.allAssessmentsForOneStudent(req.user.id)
+    promises.push(queries.avgAssessmentsForOneStudent(id));
+
+    promises.push(queries.allAssessmentsForOneStudent(id));
+
+    return Promise.all(promises)
 
     .then( function (result) {
-
+        console.log(result[0])
         res.render('studentsAll', { title: 'Students',
-                                    data: result , name: userName(req.user) });
+                                    summary: result[0],
+                                    data: result[1] , 
+                                    name: userName(req.user) });
     })
 
     .catch(function (error) { return error; });

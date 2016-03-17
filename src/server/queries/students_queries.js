@@ -76,12 +76,15 @@ module.exports = {
     },
 
 
-
-
-
-
-
-
+     
+    avgAssessmentsForOneStudent : function(studentID) {
+        
+        return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
+        .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'curricula.type_id', 'types.id')
+        .where('student_feedback.student_id', studentID);
+        
+    },
 
 
 
