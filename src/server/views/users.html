@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+  <div class="container">
+
+    {% if message %}
+    <br>
+    <div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert"></button>
+      <h4>Success! {{ message }}</h4>
+    </div>
+    {% endif %}
+
+    <h2 class='center'>Welcome Admin</h2>
+    <h3 class='center'>Click on Status to Grant or Revoke Admin Status</h3>
+    <table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+   {% for user in data %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ user.first }} {{ user.last }}</td>
+
+      <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+      {% if user.admin === true %}
+
+      <td><a href='/admin/users/{{ user.id }}/revoke'>Admin</a></td>
+
+      {% else %}  
+
+      <td><a href='/admin/users/{{ user.id }}/grant'>User</a></td>
+   
+      {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table> 
+
+  </div>
+
+{% endblock %}
