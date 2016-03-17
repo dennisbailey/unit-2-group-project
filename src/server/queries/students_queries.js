@@ -39,16 +39,18 @@ module.exports = {
       var feedbackNeeded =  knex('curricula')
                             .leftJoin(feedbackPresent, 'curricula.id', 'feedbackPresent.curriculum_id')
                             .whereNull('feedbackPresent.curriculum_id')
+                            .orderBy('curricula.feedbackDt', 'asc')
                             .as('feedbackNeeded');
       
       var types = knex('types')
-      .select('types.id as type_id', 'types.type')
-      .as('types');
+                  .select('types.id as type_id', 'types.type')
+                  .as('types');
 
 
       //add the type description
         return knex(feedbackNeeded)
-        .innerJoin(types, 'types.type_id', 'feedbackNeeded.type_id');
+        .innerJoin(types, 'types.type_id', 'feedbackNeeded.type_id')
+        .limit(10);
         
     },
 
@@ -74,12 +76,15 @@ module.exports = {
     },
 
 
-
-
-
-
-
-
+     
+    avgAssessmentsForOneStudent : function(studentID) {
+        
+        return knex('student_feedback').select('type', 'type_id').avg('rating').groupBy('type_id', 'type')
+        .innerJoin('curricula', 'curricula.id', 'student_feedback.curriculum_id')
+        .innerJoin('types', 'curricula.type_id', 'types.id')
+        .where('student_feedback.student_id', studentID);
+        
+    },
 
 
 

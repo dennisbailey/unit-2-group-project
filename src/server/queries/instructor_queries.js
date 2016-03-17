@@ -104,6 +104,6 @@ module.exports = {
         .innerJoin('types', 'curricula.type_id', 'types.id')
         .where('student_feedback.student_id', studentID);
         
-    },
+    }
 
 };
