@@ -45,32 +45,33 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, '../client')));
 
 
+
 // *** main routes *** //
 app.use('/', routes);
 
-// Routes protected by a login
-// app.use(function(req, res, next) {
-//   
-//   if (req.cookies.user) {
-//     next()
-//   } else {
-//     res.redirect('/login')
-//   }
-//   
-// });
+//Routes protected by a login
+app.use(function(req, res, next) {
+  
+  if (req.user) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+  
+});
 
 app.use('/students', students);
 
-// Routes protected by an admin login
-// app.use(function(req, res, next) {
-//   
-//   if (req.cookies.user.admin) {
-//     next()
-//   } else {
-//     res.redirect('/login')
-//   }
-//   
-// });
+//Routes protected by an admin login
+app.use(function(req, res, next) {
+  
+  if(!req.user.admin) {
+      return res.redirect('/login');
+  } else {
+      next();
+  }
+  
+});
 
 app.use('/instructors', instructors);
 app.use('/add', add);
