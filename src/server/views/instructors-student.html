@@ -24,8 +24,25 @@
           <div class="panel-heading">
             <h3 class="panel-title">{{ type.type }} Average:</h3>
           </div>
-          <div class="panel-body">
-            <h4>{{ Math.round(type.avg * 10)/10 }}</h4>
+          <div class="panel-body center">
+            <h4 class='rating'>{{ Math.round(type.avg * 10)/10 }}</h4>
+
+
+                 {% if type.avg < 3  %}
+                  <span class="glyphicon glyphicon-fire orange" aria-hidden="true"></span>
+              
+
+
+                 {% elseif type.avg < 3.4 %}
+                  <span class="glyphicon glyphicon-thumbs-up green " aria-hidden="true"></span>
+          
+
+
+                 {% else %}
+                  <span class="glyphicon glyphicon-heart red" aria-hidden="true"></span>
+                 {% endif %}
+
+
           </div>
         </div>
         </a>

@@ -69,9 +69,11 @@
       <label class="col-md-4 control-label" for="topic_id">Topic *</label>
       <div class="col-md-4">
         <select id="topic_id" name="topic_id" class="form-control">
+
           {% for topic in topics %}
             <option value="{{ topic.id }}">{{ topic.topic }}</option>
           {% endfor %}
+
         </select>
       </div>
     </div>
