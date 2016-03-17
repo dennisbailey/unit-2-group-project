@@ -21,7 +21,7 @@
         <a href="/instructors/{{ type.type_id }}">
         <div class="panel panel-primary">
           <div class="panel-heading">
-            <h2 class="panel-title">{{ type.type }} Average:</h2>
+            <h2 class="title">{{ type.type }} Average:</h2>
           </div>
           <div class="panel-body center">
             <h3 class='rating'>{{ Math.round(type.avg * 10)/10 }}</h3>
@@ -46,8 +46,7 @@
       </div>
       {% endfor %}
     </div>
- 
-  </div>
+
   
   <hr>
   
@@ -76,6 +75,7 @@
       </tbody>
     
     </table> 
-
+</div>
+</div>
 
 {% endblock %}
