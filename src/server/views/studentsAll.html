@@ -9,10 +9,11 @@
 
        <div class="row">
     
-      
+      <h1 class='center'>Way to go, {{ name }}!</h1>
+      <br>
       {% for type in summary %}
       <div class="col-md-4">
-        <a href="/instructors/{{ type.type_id }}/student/{{ data[0].student_id }}">
+        <a href="/students/{{ type.type_id }}">
         <div class="panel panel-primary">
           <div class="panel-heading">
             <h2 class="title">{{ type.type }} Average:</h2>
@@ -91,7 +92,7 @@
 
           {%  else %}
 
-          <td><a href="/students/all/{{ row.id }}">Rate now</a></td>
+          <td><a href="/students/">Rate now</a></td>
 
           {% endif %}
           <td>{{ row.assignmentDt|date('Y-m-d') }}</td>

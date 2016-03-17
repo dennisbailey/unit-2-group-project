@@ -84,7 +84,6 @@ router.get('/all', function(req, res, next){
     return Promise.all(promises)
 
     .then( function (result) {
-        console.log(result[0])
         res.render('studentsAll', { title: 'Students',
                                     summary: result[0],
                                     data: result[1] , 
