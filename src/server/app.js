@@ -48,28 +48,28 @@ app.use(express.static(path.join(__dirname, '../client')));
 app.use('/', routes);
 
 // Routes protected by a login
-app.use(function(req, res, next) {
-  
-  if (req.cookies.user) {
-    next()
-  } else {
-    res.redirect('/login')
-  }
-  
-});
+// app.use(function(req, res, next) {
+//   
+//   if (req.cookies.user) {
+//     next()
+//   } else {
+//     res.redirect('/login')
+//   }
+//   
+// });
 
 app.use('/students', students);
 
 // Routes protected by an admin login
-app.use(function(req, res, next) {
-  
-  if (req.cookies.user.admin) {
-    next()
-  } else {
-    res.redirect('/login')
-  }
-  
-});
+// app.use(function(req, res, next) {
+//   
+//   if (req.cookies.user.admin) {
+//     next()
+//   } else {
+//     res.redirect('/login')
+//   }
+//   
+// });
 
 app.use('/instructors', instructors);
 
