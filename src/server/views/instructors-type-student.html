@@ -6,10 +6,12 @@
 {% block content %}
 
   <div class="container">
- 
+    <a href="/instructors/{{ data[0].id }}">&#171; Back to {{ data[0].type }} Overview</a>
+    <br>
+    <br>
     <div class="row">
     	<div class="col-md-12">
-      	<h3>{{ data[0].first }} {{ data[0].last }}'s {{data[0].type }} Feedback</h3>
+      	<h3>{{ data[0].first }} {{ data[0].last }}'s {{ data[0].type }} Feedback</h3>
         <br>
     	</div>
     </div>

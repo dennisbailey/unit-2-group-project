@@ -77,8 +77,8 @@ router.get('/:type/student/:id', function(req, res, next){
 
     .then( function (result) {
         res.render('instructors-type-student', { title: 'Instructors',
-                                         data: result,
-                                         name: userName(req.user) });
+                                                 data: result,
+                                                 name: userName(req.user) });
     })
 
     .catch( function (error) { return error; });
