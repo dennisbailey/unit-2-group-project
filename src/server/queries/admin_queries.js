@@ -2,30 +2,30 @@ var knex = require("../../../db/knex");
 
 
 module.exports = {
-   
+
    // *** Make it Dry *** //
     allFromTable : function(table) {
-      return knex(table)
+      return knex(table);
     },
-    
+
     makeEdit : function(table, id, object) {
        return knex(table)
        .where ('id', id)
        .update(object);
     },
-    
+
     deleteFrom : function(table, id) {
        return knex(table)
        .where('id', id)
-       .delete();   
+       .delete();
     },
-    
+
     addTo : function(table, object) {
         return knex(table)
        .insert(object);
     },
-    
-    
+
+
     // *** Assignment Queries *** //
     allAssignments : function() {
         return knex('curricula')
@@ -42,31 +42,31 @@ module.exports = {
         .innerJoin('types', 'types.id', 'curricula.type_id')
         .innerJoin('topics', 'topics.id', 'curricula.topic_id')
         .leftOuterJoin('instructors', 'instructors.id', 'curricula.instructor_id')
-        .where('curricula.id', id)
+        .where('curricula.id', id);
     },
-   
-   
+
+
     // *** One offs *** //
     showOneInstructor : function(id){
        return knex('instructors')
-       .where('id', id);   
+       .where('id', id);
     },
-  
-    
+
+
     allUsers : function(){
       return knex('users')
-      .orderBy('admin', 'desc','last', 'asc');  
+      .orderBy('admin', 'desc','last', 'asc');
     },
-    
-    
+
+
     // *** Create and Delete Admins *** //
     removeAdmin : function(id){
        return knex('users')
        .where('id', id)
        .update({ admin : false});
     },
-    
-    
+
+
     makeAdmin : function(id){
        return knex('users')
        .where('id', id)
