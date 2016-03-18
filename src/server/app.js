@@ -15,7 +15,7 @@ var helpers = require('./lib/helpers.js');
 var routes = require('./routes/index.js');
 var instructors = require('./routes/instructors.js');
 var students = require('./routes/students.js');
-var admin = require('./routes/admin.js')
+var admin = require('./routes/admin.js');
 
 // *** express instance *** //
 var app = express();
@@ -51,26 +51,26 @@ app.use('/', routes);
 
 //Routes protected by a login
 app.use(function(req, res, next) {
-  
+
   if (req.user) {
-    next()
+    next();
   } else {
-    res.redirect('/login')
+    res.redirect('/login');
   }
-  
+
 });
 
 app.use('/students', students);
 
 //Routes protected by an admin login
 app.use(function(req, res, next) {
-  
+
   if(!req.user.admin) {
       return res.redirect('/login');
   } else {
       next();
   }
-  
+
 });
 
 app.use('/instructors', instructors);

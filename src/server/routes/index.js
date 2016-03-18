@@ -7,11 +7,11 @@ var helpers = require('../lib/helpers');
 
 // *** Helper Funtions *** //
 function userName(user){
-    
+
     var name = '';
-    
+
     if(user) { name = user.first; }
-    
+
     return name;
 }
 
@@ -20,14 +20,14 @@ function userName(user){
 router.get('/', function(req, res, next) {
 
     index_queries.allAssignments()
-  
+
     .then(function(result) {
-        res.render('index', { title: 'Home', 
-                              status: req.session.length, 
-                              data: result, 
+        res.render('index', { title: 'Home',
+                              status: req.session.length,
+                              data: result,
                               name: userName(req.user) });
     })
-    
+
     .catch( function (error) { return error; });
 
 });
@@ -42,36 +42,36 @@ router.get('/registration', function(req, res, next) {
 
 // Submit Registration and check for a unique email
 router.post('/registration', function(req, res, next) {
-    
+
     var newUser = req.body;
     var hash = helpers.hashing(newUser.password);
-    
+
     newUser.password = hash;
-    
+
     index_queries.checkIfUserExists(newUser.email)
 
     .then(function(data) {
         if(data.length) {
-      
+
             res.render('registration', {
               message: 'This email already exists'
             });
-      
+
         } else {
-      
+
             index_queries.addNewUser(newUser)
-        
+
             .then(function() {
                 res.redirect('/');
             })
-            
+
             .catch( function (error) { return error; });
         }
-      
+
     })
-    
+
     .catch( function (error) { return error; });
-  
+
 });
 
 
@@ -101,7 +101,7 @@ router.post('/login', function(req, res, next) {
                   return next(err);
               } else {
                   if (req.user.admin) {
-                    return res.redirect('/instructors')
+                    return res.redirect('/instructors');
                   } else {
                     return res.redirect('/students');
                   }
@@ -116,7 +116,7 @@ router.post('/login', function(req, res, next) {
 router.get('/logout', function(req, res, next) {
 
     req.session = null;
-    
+
     res.redirect('/');
 
 });
@@ -127,11 +127,11 @@ router.get('/logout', function(req, res, next) {
 router.get('/sortByTitle', function(req, res, next){
 
     index_queries.allAssignmentsSortbyTitle()
-    
+
     .then(function(result) {
-        res.render('index', { title: 'Home', 
-                              status: req.session.length, 
-                              data: result, 
+        res.render('index', { title: 'Home',
+                              status: req.session.length,
+                              data: result,
                               name: userName(req.user) });
     });
 
@@ -142,11 +142,11 @@ router.get('/sortByTitle', function(req, res, next){
 router.get('/sortByInstructor', function(req, res, next){
 
     index_queries.allAssignmentsSortByInstructor()
-    
+
     .then(function(result) {
-        res.render('index', { title: 'Home', 
-                              status: req.session.length, 
-                              data: result, 
+        res.render('index', { title: 'Home',
+                              status: req.session.length,
+                              data: result,
                               name: userName(req.user) });
     });
 
@@ -157,11 +157,11 @@ router.get('/sortByInstructor', function(req, res, next){
 router.get('/sortByType', function(req, res, next){
 
     index_queries.allAssignmentsSortByType()
-    
+
     .then(function(result) {
-        res.render('index', { title: 'Home', 
-                              status: req.session.length, 
-                              data: result, 
+        res.render('index', { title: 'Home',
+                              status: req.session.length,
+                              data: result,
                               name: userName(req.user) });
     });
 
@@ -172,11 +172,11 @@ router.get('/sortByType', function(req, res, next){
 router.get('/sortByDate', function(req, res, next){
 
     index_queries.allAssignmentsSortByDate()
-    
+
     .then(function(result) {
-        res.render('index', { title: 'Home', 
-                              status: req.session.length, 
-                              data: result, 
+        res.render('index', { title: 'Home',
+                              status: req.session.length,
+                              data: result,
                               name: userName(req.user) });
     });
 
