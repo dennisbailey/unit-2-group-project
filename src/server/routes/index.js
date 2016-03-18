@@ -100,7 +100,11 @@ router.post('/login', function(req, res, next) {
               if (err) {
                   return next(err);
               } else {
-                  return res.redirect('/');
+                  if (req.user.admin) {
+                    return res.redirect('/instructors')
+                  } else {
+                    return res.redirect('/students');
+                  }
               }
             });
         }
