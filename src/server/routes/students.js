@@ -15,7 +15,7 @@ function userName(user){
 }
 
 // Create an array of objects to pass to knex to insert feedback into the table student_feedback
-function createInsert(arrayOfObjects){
+function createInsert(arrayOfObjects, student) {
 
     // This function will take an object (req.body) with the key value pairs of curriculum ID and rating
     // Find all the curriculum Ids with Object.keys() so we can loop through them
@@ -36,16 +36,15 @@ function createInsert(arrayOfObjects){
         if(body[keys[i]] !== ''){
 
           var object= {};
-
+          
           // Create the key value pairs that correspond to the columns in student_feedback and their values
-          object.student_id = req.user.id;
+          object.student_id = student;
           object.curriculum_id = keys[i];
           object.rating = body[keys[i]];
           object.feedbackDt =  today;
 
           // Push the object to the array insert before checking the next curriculum ID in keys
           insert.push(object);
-
         }
     }
 
@@ -60,10 +59,11 @@ router.get('/', function(req, res, next) {
     queries.allUnratedForOneStudent(req.user.id)
 
     .then(function(result){
-      console.log(result);
+
         res.render('students', { title: 'students',
                                  data: result,
-                                 name: userName(req.user) });
+                                 name: userName(req.user),
+                                 id: req.user.id });
     })
 
     .catch(function(error) { return error; });
@@ -74,9 +74,8 @@ router.get('/', function(req, res, next) {
 // This GET route shows a student all of the learning experiences and attaches a rating if present
 // If there's no rating, the learning experience will offer them a link back to the assesments page
 router.get('/all', function(req, res, next){
-     var id =req.user.id;
+    var id = req.user.id;
     var promises = [];
-
     promises.push(queries.avgAssessmentsForOneStudent(id));
 
     promises.push(queries.allAssessmentsForOneStudent(id));
@@ -97,11 +96,13 @@ router.get('/all', function(req, res, next){
 
 
 // This POST route creates an array of objects to pass to knex and insert into student_feedback
-router.post('/addrating', function(req, res, next){
+router.post('/addrating/:id', function(req, res, next){
 
     // Pass req.body to createInsert()
     var ratings = req.body;
-    var insertbody = createInsert(ratings);
+    var student = req.params.id;
+    var insertbody = createInsert(ratings, student);
+    
 
     // Pass the array of objects to knex
     queries.insertFeedback(insertbody)

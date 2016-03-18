@@ -12,8 +12,8 @@
         <br>
       </div>
     </div>
-
-      <form class="form-horizontal" method="post" action="/students/addrating">
+{{ user.id}}
+      <form class="form-horizontal" method="post" action="/students/addrating/{{ id }}">
         <fieldset>
         
         {% for row in data %}
